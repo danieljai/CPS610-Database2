@@ -1,0 +1,174 @@
+5)
+sudo apt-get update;
+sudo apt-get install default-jdk -y;
+
+java -version;
+
+
+6)
+sudo apt install openssh-server openssh-client -y;
+
+
+
+8)
+ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa;
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys;
+chmod 0600 ~/.ssh/authorized_keys;
+ssh localhost;
+
+8)
+cd ~;
+wget https://downloads.apache.org/hadoop/common/hadoop-3.2.1/hadoop-3.2.1.tar.gz;
+
+
+9)
+tar xzf hadoop-3.2.1.tar.gz;
+
+
+10)
+cd ~;
+ls;
+
+
+
+11)
+sudo nano .bashrc;
+
+export HADOOP_HOME=/home/hadoop-3.2.1
+export HADOOP_INSTALL=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
+export HADOOP_OPTS"-Djava.library.path=$HADOOP_HOME/lib/native"
+
+
+12)
+which javac;
+readlink -f /usr/bin/javac;
+
+
+
+13)
+cd ~/hadoop-3.2.1;
+nano etc/hadoop/hadoop-env.sh;
+
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+
+
+14)
+cd ~/hadoop-3.2.1;
+sudo nano etc/hadoop/core-site.xml;
+
+
+<configuration>
+	<property>
+		<name>hadoop.tmp.dir</name>
+		<value>/home/<user>/tmpdata</value>
+	</property>
+	<property>
+		<name>fs.default.name</name>
+		<value>hdfs://127.0.0.1:9000</value>
+	</property>
+</configuration>
+
+
+15)
+cd ~;
+mkdir dfsdata;
+mkdir dfsdata/namenode;
+mkdir dfsdata/datanode;
+
+cd ~/hadoop-3.2.1;
+sudo nano etc/hadoop/hdfs-site.xml
+
+
+<configuration>
+	<property>
+		<name>dfs.data.dir</name>
+		<value>/home/<user>/dfsdata/namenode</value>
+	</property>
+	<property>
+		<name>dfs.data.dir</name>
+		<value>/home/<user>/dfsdata/datanode</value>
+	</property>
+	<property>
+		<name>dfs.replication</name>
+		<value>1</value>
+	</property>
+</configuration>
+
+
+
+16)
+cd ~/hadoop-3.2.1;
+hdfs namenode -format;
+
+cd sbin;
+./start-dfs.sh;
+./start-yarn.sh;
+jps;
+
+
+
+17)
+http://localhost:9870/
+
+
+
+18)
+~/hadoop-3.2.1/bin/hdfs dfs -mkdir /user;
+~/hadoop-3.2.1/bin/hdfs dfs -mkdir /user/demo;
+
+
+
+19)
+cd ~/hadoop-3.2.1;
+wget http://hadoop.apache.org -O hadoop_home_page.html;
+./bin/hdfs dfs -put hadoop_home_page.html /user/demo;
+ls /user/demo;
+
+
+
+
+
+~/hadoop-3.2.1/bin/hdfs dfs -ls /user;
+~/hadoop-3.2.1/bin/hdfs dfs -ls /user/demo;
+ls /user
+ls /user/demo
+
+
+20)
+~/hadoop-3.2.1/bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.1.jar grep /user/demo/hadoop_home_page.html /user/demo/hadoop_home_page.html_OUTPUT_2 'https';
+~/hadoop-3.2.1/bin/hdfs dfs -ls /user/demo/;
+~/hadoop-3.2.1/bin/hdfs dfs -get /user/demo/hadoop_home_page.html_OUTPUT_2 hadoop_home_page.html_OUTPUT_2;
+cat hadoop_home_page.html_OUTPUT_2/part-r-00000;
+cat hadoop_home_page.html | grep -o -w 'https' | wc -w;
+
+
+
+
+21)
+~/hadoop-3.2.1/bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.1.jar wordcount /user/demo/hadoop_home_page.html /user/demo/hadoop_home_page.html_OUTPUT_1;
+~/hadoop-3.2.1/bin/hdfs dfs -ls /user/demo
+~/hadoop-3.2.1/bin/hdfs dfs -get /user/demo/hadoop_home_page.html_OUTPUT_1 ~/hadoop-3.2.1/hadoop_home_page.html_OUTPUT_1;
+head -n 50 ~/hadoop-3.2.1/hadoop_home_page.html_OUTPUT_1/part-r-00000;
+
+
+22)
+cd ~/hadoop-3.2.1/
+nano ~/hadoop-3.2.1/wordcount_map.py;
+nano ~/hadoop-3.2.1/wordcount_red.py;
+ls ~/hadoop-3.2.1/;
+chmod u+x ~/hadoop-3.2.1/wordcount_map.py;
+chmod u+x ~/hadoop-3.2.1/wordcount_red.py;
+
+23)
+ls ~/hadoop-3.2.1/;
+~/hadoop-3.2.1/bin/hdfs dfs -ls /user/demo;
+~/hadoop-3.2.1/bin/hadoop jar share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar -mapper ~/hadoop-3.2.1/wordcount_map.py -reducer ~/hadoop-3.2.1/wordcount_red.py -input /user/demo/hadoop_home_page.html -output /user/demo/hadoop_home_page.html_OUTPUT_COUNT6;
+~/hadoop-3.2.1/bin/hdfs dfs -ls /user/demo;
+~/hadoop-3.2.1/bin/hdfs dfs -get /user/demo/hadoop_home_page.html_OUTPUT_COUNT6 ~/hadoop-3.2.1/hadoop_home_page.html_OUTPUT_COUNT;
+head ~/hadoop-3.2.1/hadoop_home_page.html_OUTPUT_COUNT/part-00000;

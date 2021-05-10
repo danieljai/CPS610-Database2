@@ -1,0 +1,117 @@
+[
+  {
+    "_id": ObjectId("6064f515ba1f0f7972ecb73d"),
+    "StudentNo": 800587128,
+    "StudentFirstName": "Jack",
+    "StudentLastName": "Sparrow",
+    "Degree": "B.Sc.",
+    "Faculty": "Science",
+    "GPA": 0.7,
+    "Enrolled": [
+      {
+        "CourseNo": "CPS 706",
+        "ProfFirstName": "Sattar",
+        "ProfLastName": "Hussain",
+        "Term": "Fall 2019"
+      },
+      {
+        "CourseNo": "CPS 406",
+        "ProfFirstName": "Nawar",
+        "ProfLastName": "Hakeem",
+        "Term": "Winter 2020"
+      }
+    ]
+  },
+  {
+    "_id": ObjectId("6064f515ba1f0f7972ecb737"),
+    "StudentNo": 800587122,
+    "StudentFirstName": "Sohrab",
+    "StudentLastName": "Soltani",
+    "Degree": "B.Sc.",
+    "Faculty": "Science",
+    "GPA": 4.22,
+    "Enrolled": [
+      {
+        "CourseNo": "CPS 213",
+        "ProfFirstName": "Alex",
+        "ProfLastName": "Ufkes",
+        "Term": "Fall 2016"
+      },
+      {
+        "CourseNo": "CPS 310",
+        "ProfFirstName": "Alex",
+        "ProfLastName": "Ufkes",
+        "Term": "Winter 2017"
+      }
+    ]
+  },
+  {
+    "_id": ObjectId("6064f515ba1f0f7972ecb736"),
+    "StudentNo": 800587121,
+    "StudentFirstName": "Andy",
+    "StudentLastName": "Lee",
+    "Degree": "B.Sc.",
+    "Faculty": "Science",
+    "GPA": 4.33,
+    "Enrolled": [
+      {
+        "CourseNo": "CPS 109",
+        "ProfFirstName": "Ilkka",
+        "ProfLastName": "Kokkarinen",
+        "Term": "Fall 2015"
+      },
+      {
+        "CourseNo": "CPS 209",
+        "ProfFirstName": "Ilkka",
+        "ProfLastName": "Kokkarinen",
+        "Term": "Winter 2016"
+      }
+    ]
+  },
+  {
+    "_id": ObjectId("6064f515ba1f0f7972ecb739"),
+    "StudentNo": 800587124,
+    "StudentFirstName": "Jane",
+    "StudentLastName": "Smith",
+    "Degree": "B.Sc.",
+    "Faculty": "Science",
+    "GPA": 1.12,
+    "Enrolled": [
+      {
+        "CourseNo": "CPS 412",
+        "ProfFirstName": "Muhammad Naeem",
+        "ProfLastName": "Irfan",
+        "Term": "Fall 2013"
+      },
+      {
+        "CourseNo": "BLG 143",
+        "ProfFirstName": "Vadim",
+        "ProfLastName": "Bostan",
+        "Term": "Winter 2014"
+      }
+    ]
+  },
+  {
+    "_id": ObjectId("6064f515ba1f0f7972ecb73a"),
+    "StudentNo": 800587125,
+    "StudentFirstName": "Umberto",
+    "StudentLastName": "Gonzales",
+    "Degree": "B.Sc.",
+    "Faculty": "Science",
+    "GPA": 3.15,
+    "Enrolled": [
+      {
+        "CourseNo": "CPS 590",
+        "ProfFirstName": "Alex",
+        "ProfLastName": "Ufkes",
+        "Term": "Fall 2011"
+      },
+      {
+        "CourseNo": "CPS 420",
+        "ProfFirstName": "Sophie",
+        "ProfLastName": "Quigley",
+        "Term": "Winter 2012"
+      }
+    ]
+  }
+]
